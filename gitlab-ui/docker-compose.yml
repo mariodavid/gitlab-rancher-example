@@ -1,10 +1,14 @@
 web:
   image: 'gitlab/gitlab-ce:latest'
   restart: always
-  hostname: '192.168.99.100'
+#  hostname: '192.168.99.100'
+  hostname: '162.243.185.31'
+#  environment:
+#    GITLAB_OMNIBUS_CONFIG: |
+#      external_url 'http://192.168.99.100'
   environment:
     GITLAB_OMNIBUS_CONFIG: |
-      external_url 'http://192.168.99.100'
+      external_url 'http://162.243.185.31'
   ports:
     - '80:80'
     - '443:443'
