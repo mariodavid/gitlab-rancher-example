@@ -140,4 +140,24 @@ cat docker-compose.yml
 docker-compose up -d
 ````
 
-#### 2.2 create access control, environment & API token
+#### 2.2 craete a Rancher host for the default environment to run our containers
+
+Rancher UI > Default environment > Hosts > Add Host > Digitalocean. Add the Access token of Digitalocean ($DOTOKEN) and create a machine.
+
+#### 2.3 create access control, environment & API token
+
+Create a Rancher CLI access token through the UI of rancher (API > Keys) and put the following environment variables into your .bashrc file:
+````
+export RANCHER_URL=http://<<RANCHER_IP>>:8080
+export RANCHER_ACCESS_KEY=<accessKey_of_account_api_key>
+export RANCHER_SECRET_KEY=<secretKey_of_account_api_key>
+````
+
+#### 2.4 deploy application stack manually
+````
+git clone https://github.com/mariodavid/kubanische-kaninchenzuechterei
+cd kubanische-kaninchenzuechterei/deployment
+cat docker-compose.yml
+cat rancher-compose.yml
+rancher up
+````
