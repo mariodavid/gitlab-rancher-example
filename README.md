@@ -153,11 +153,36 @@ export RANCHER_ACCESS_KEY=<accessKey_of_account_api_key>
 export RANCHER_SECRET_KEY=<secretKey_of_account_api_key>
 ````
 
+
 #### 2.4 deploy application stack manually
 ````
 git clone https://github.com/mariodavid/kubanische-kaninchenzuechterei
 cd kubanische-kaninchenzuechterei/deployment
 cat docker-compose.yml
 cat rancher-compose.yml
+
 rancher up
+````
+
+
+### 3. Deploy to Rancher from Gitlab
+
+Add environment variables to the Gitlab project:
+````
+RANCHER_URL=http://RANCHER_HOST_IP:8080/
+RANCHER_ACCESS_KEY=...
+RANCHER_SECRET_KEY=...
+````
+Add the following step to your .gitlab-ci.yml:
+````
+stages:
+  - ...
+  - deploy
+
+deploy:
+  stage: deploy
+  image: cdrx/rancher-gitlab-deploy
+  script:
+    - upgrade --stack deployment --service web --new-image $CONTAINER_TEST_IMAGE
+
 ````
